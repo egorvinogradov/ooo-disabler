@@ -2,6 +2,8 @@
 
 Prevents working from home (and occasionally procrastinating) by constantly disabling Wi-Fi and putting Mac to sleep if connected to home Wi-Fi during worktime.
 
+![image](https://user-images.githubusercontent.com/1618344/69007195-8e61a480-0932-11ea-8c21-9874a399427e.png)
+
 
 ## Installation
 

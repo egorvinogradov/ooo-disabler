@@ -1,0 +1,14 @@
+{
+  "name": "ooo-disabler",
+  "version": "1.0.0",
+  "description": "Prevents working from home (and occasionally procrastinating) by constantly disabling Wi-Fi and putting Mac to sleep if connected to home Wi-Fi during worktime.",
+  "main": "ooo-disabler.js",
+  "scripts": {
+    "start": "node ooo-disabler.js",
+    "build": "./build.sh"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "pkg": "^4.4.0"
+  }
+}

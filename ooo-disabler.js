@@ -23,12 +23,17 @@ const config = getConfig();
 
 
 if (shouldTurnOffLaptop()) {
-  showNotification('WORKING OUT OF OFFICE DETECTED', 'Putting laptop to sleep now');
+  showNotification('WORKING OUT OF OFFICE DETECTED', 'Putting laptop to sleep in 30 seconds...');
+
   setTimeout(() => {
-    showNotification('SLEEP', '');
-    // disconnectWifi();
-    // putToSleep();
-  }, 3 * 1000);
+    showNotification('WORKING OUT OF OFFICE DETECTED', 'Putting laptop to sleep now');
+
+    setTimeout(() => {
+      showNotification('SLEEP', '');
+      disconnectWifi();
+      putToSleep();
+    }, 3 * 1000)
+  }, 30 * 1000);
 }
 
 
@@ -62,13 +67,13 @@ function getConfig(){
 
 function isLidOpen(){
   const cmd = `ioreg -r -k AppleClamshellState -d 4 | grep AppleClamshellState | head -1`;
-  return execSync(cmd).indexOf('= No') > -1;
+  return execCmd(cmd).indexOf('= No') > -1;
 }
 
 
 function isConnectedToHomeWifi(homeWifiName){
   const cmd = `/System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -I | awk -F: '/ SSID/{print $2}'`;
-  const currentWifiName = execSync(cmd).trim();
+  const currentWifiName = execCmd(cmd).trim();
   return currentWifiName === homeWifiName;
 }
 
@@ -109,7 +114,7 @@ function isWorkHours(selectedDays, startAt, endAt){
 
 function showNotification(title, text){
   const cmd = `osascript -e 'display notification "${text}" with title "${title}" sound name "Glass"'`;
-  execSync(cmd);
+  execCmd(cmd);
 }
 
 

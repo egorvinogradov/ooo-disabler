@@ -48,5 +48,11 @@ mv binary/ooo-disabler $binary_path
 cp ooo-disabler.plist $launchd_plist_path
 launchctl load $launchd_plist_path/ooo-disabler.plist
 
+if [ "$FROM_GIT" -eq "1" ]; then
+   printf "\nRemoving downloaded repository...\n"
+   cd ..
+   rm -rf ooo-disabler
+fi
+
 tput setaf 2
 printf "\nooo-disabler has been successfully installed!\n"

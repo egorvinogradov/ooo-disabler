@@ -7,6 +7,6 @@
     <key>Program</key>
     <string>/usr/local/bin/ooo-disabler</string>
     <key>StartInterval</key> 
-    <integer>5</integer>
+    <integer>35</integer>
   </dict>
 </plist>

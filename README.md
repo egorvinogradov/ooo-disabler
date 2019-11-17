@@ -7,7 +7,7 @@ Prevents working from home (and occasionally procrastinating) by constantly disa
 
 Run this in your Terminal:
 ```
-git clone https://github.com/egorvinogradov/ooo-disabler.git && cd ooo-disabler && ./install.sh
+git clone https://github.com/egorvinogradov/ooo-disabler.git && cd ooo-disabler && export FROM_GIT=1 && ./install.sh
 ```
 It will ask you a few questions to have you set up.
 

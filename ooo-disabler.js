@@ -17,23 +17,21 @@ if (process.argv.includes('--uninstall')) {
     process.exit(0);
   });
 }
+else {
+  const config = getConfig();
 
-
-const config = getConfig();
-
-
-if (shouldTurnOffLaptop()) {
-  showNotification('WORKING OUT OF OFFICE DETECTED', 'Putting laptop to sleep in 30 seconds...');
-
-  setTimeout(() => {
-    showNotification('WORKING OUT OF OFFICE DETECTED', 'Putting laptop to sleep now');
+  if (shouldTurnOffLaptop()) {
+    showNotification('WORKING OUT OF OFFICE DETECTED', 'Putting laptop to sleep in 30 seconds...');
 
     setTimeout(() => {
-      showNotification('SLEEP', '');
-      disconnectWifi();
-      putToSleep();
-    }, 3 * 1000)
-  }, 30 * 1000);
+      showNotification('WORKING OUT OF OFFICE DETECTED', 'Putting laptop to sleep now');
+
+      setTimeout(() => {
+        disconnectWifi();
+        putToSleep();
+      }, 3 * 1000)
+    }, 30 * 1000);
+  }
 }
 
 

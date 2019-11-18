@@ -17,21 +17,18 @@ if (process.argv.includes('--uninstall')) {
     process.exit(0);
   });
 }
-else {
-  const config = getConfig();
+else if (shouldTurnOffLaptop( getConfig() )) {
 
-  if (shouldTurnOffLaptop()) {
-    showNotification('WORKING OUT OF OFFICE DETECTED', 'Putting laptop to sleep in 30 seconds...');
+  showNotification('WORKING OUT OF OFFICE DETECTED', 'Putting laptop to sleep in 30 seconds...');
+
+  setTimeout(() => {
+    showNotification('WORKING OUT OF OFFICE DETECTED', 'Putting laptop to sleep now');
 
     setTimeout(() => {
-      showNotification('WORKING OUT OF OFFICE DETECTED', 'Putting laptop to sleep now');
-
-      setTimeout(() => {
-        disconnectWifi();
-        putToSleep();
-      }, 3 * 1000)
-    }, 30 * 1000);
-  }
+      disconnectWifi();
+      putToSleep();
+    }, 3 * 1000)
+  }, 30 * 1000);
 }
 
 
@@ -160,7 +157,7 @@ function putToSleep(){
 }
 
 
-function shouldTurnOffLaptop(){
+function shouldTurnOffLaptop(config){
   return isLidOpen()
     && isConnectedToHomeWifi(config.HOME_WIFI_SSID)
     && isWorkHours(config.SELECTED_DAYS, config.START_AT, config.END_AT);

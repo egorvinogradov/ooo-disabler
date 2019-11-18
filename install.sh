@@ -42,7 +42,7 @@ echo END_AT=$END_AT                 >> $config_path/.config
 
 printf "\nPreparing binary...\n"
 
-unzip binary/ooo-disabler.zip
+unzip binary/ooo-disabler.zip -d binary
 mv binary/ooo-disabler $binary_path
 
 cp ooo-disabler.plist $launchd_plist_path

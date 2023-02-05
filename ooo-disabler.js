@@ -66,10 +66,13 @@ function isLidOpen(){
 }
 
 
-function isConnectedToHomeWifi(homeWifiName){
-  const cmd = `/System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -I | awk -F: '/ SSID/{print $2}'`;
-  const currentWifiName = execCmd(cmd).trim();
-  return currentWifiName === homeWifiName;
+function isHomeWifiOrOff(homeWifiName){
+  const wifiNameCmd = `/System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -I | awk -F: '/ SSID/{print $2}'`;
+  const wifiOffCmd = `/System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -I`;
+
+  const isConnectedToHomeWifi = execCmd(wifiNameCmd).trim() === homeWifiName;
+  const isWifiOff = execCmd(wifiOffCmd).trim() === 'AirPort: Off';
+  return isConnectedToHomeWifi || isWifiOff;
 }
 
 
@@ -159,6 +162,6 @@ function putToSleep(){
 
 function shouldTurnOffLaptop(config){
   return isLidOpen()
-    && isConnectedToHomeWifi(config.HOME_WIFI_SSID)
+    && isHomeWifiOrOff(config.HOME_WIFI_SSID)
     && isWorkHours(config.SELECTED_DAYS, config.START_AT, config.END_AT);
 }
